@@ -65,25 +65,7 @@ function Home() {
 
   return (
     <HomeBox>
-      <NavBar />
-      <Box sx={{ flexGrow: 1 }}>
-        <SearchBox>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md>
-              <Typography sx={{ fontWeight: "bold", fontSize: "2.5rem" }} color="primary">政大課程評價網</Typography>
-            </Grid>
-          </Grid>
-          <form onSubmit={handleSubmit} style={{ display: "flex", alignItems: "center", height: "80px" }}>
-            <SearchBarBox>
-              <SearchBarInput value={search} onChange={(e) => setSearch(e.target.value)} placeholder="輸入課名、老師或系所" />
-            </SearchBarBox>
-            <StyledIconButton color="primary" size="large" type="submit">
-              <SearchIcon fontSize="large" />
-            </StyledIconButton>
-          </form>
-        </SearchBox>
-      </Box>
-      <AuthModal open={open} handleClose={() => dispatch({type: "auth.dialog.close"})} />
+     
     </HomeBox>
   )
 

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // axios.defaults.baseURL = "";
-axios.defaults.baseURL = "https://desolate-stream-68947.herokuapp.com"
+axios.defaults.baseURL = ""
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 /*
