@@ -1,12 +1,14 @@
-import { Box, Typography, IconButton, Grid } from "@mui/material";
+import { Box, Typography, IconButton, Grid, Container, Paper, Pagination } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import NavBar from "../components/NavBar/Main";
+import Card from "../components/Card/Main";
 import TypeButtonToggler from "../components/TypeButtonToggler";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AuthModal from "../components/AuthDialog/Main";
+import ajax from  "../api/index.js"
 
 const HomeBox = styled(Box)(({ theme }) => ({
   height: "100vh",
@@ -53,7 +55,14 @@ function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [buses, setBuses] = useState([]);
+  const loading = useSelector(state => state.course.loading);
   const open = useSelector(state => state.auth.dialogOpen);
+
+  const SearchBox = styled(Box)(({ theme }) => ({}));
+  const PaginationBox = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.background.default,
+  }));
 
   useEffect(()=>{
     const getBus = async () => {
@@ -61,6 +70,7 @@ function Home() {
         const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON"
         const method = "GET";
           const result = await ajax(url, method);
+          console.log('result :', result);
           setBuses(result.data);
       }
       catch(err){
@@ -78,17 +88,17 @@ function Home() {
     });
   }
 
-  const busCards = courses.map((course, index) => {
+  const busCards = buses.map((bus, index) => {
     return (
       <Grid item xs={12} sm={6} md={4} key={index}>
         <Card
-          course={course.code}
-          name={course.courseNameZH_TW}
-          teacher={course.instructorZH_TW}
-          unit={course.departmentZH_TW}
-          rate={course.avg_rate == -1 ? "無" : course.avg_rate.toFixed(1)}
-          customRatePopulationm={course.num_of_custom_feedback}
-          totalRatePopulation={course.num_of_feedback + course.num_of_custom_feedback}
+          // bus={bus.code}
+          // name={bus.busNameZH_TW}
+          // teacher={bus.instructorZH_TW}
+          // unit={bus.departmentZH_TW}
+          // rate={bus.avg_rate == -1 ? "無" : bus.avg_rate.toFixed(1)}
+          // customRatePopulationm={bus.num_of_custom_feedback}
+          // totalRatePopulation={bus.num_of_feedback + course.num_of_custom_feedback}
         />
       </Grid>
     )
@@ -133,8 +143,8 @@ function Home() {
             :
             ""
         }
-        {
-          genCards.length != 0 ?
+        {/* {
+          busCards.length != 0 ?
             <PaginationBox sx={{ position: "fixed", bottom: 0, right: 0, left: 0, padding: "15px 0px", display: "flex", justifyContent: "center" }} elevation={0}>
               <Pagination
                 page={Number(page)}
@@ -147,7 +157,7 @@ function Home() {
             </PaginationBox>
             :
             ""
-        }
+        } */}
       </Container>
       <AuthModal open={open} handleClose={() => dispatch({type: "auth.dialog.close"})} />
     </HomeBox>
