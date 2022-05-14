@@ -18,7 +18,12 @@
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.27.2",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-google-login": "^5.2.2",
+    "react-redux": "^8.0.1",
+    "react-router-dom": "^6.3.0",
+    "redux-thunk": "^2.4.1",
+    "reselect": "^4.1.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
