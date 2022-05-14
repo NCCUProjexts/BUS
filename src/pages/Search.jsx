@@ -19,6 +19,7 @@ function Search() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = useState(searchParams.get("search"));
+  const [buses, setBuses] = useState(searchParams.get("search"));
   const [page, setPage] = useState(searchParams.get("page") ? searchParams.get("page") : 1);
   const loading = useSelector(state => state.course.loading);
   const courses = useSelector(state => coursesPagination(state, page));
@@ -30,8 +31,17 @@ function Search() {
     setPage(searchParams.get("page") ? searchParams.get("page") : 1);
   }, [searchParams]);
 
-  useEffect(() => {
-    dispatch(getCourse(search));
+  useEffect(async () => {
+    try{
+      const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON"
+      const method = "GET";
+        const result = await ajax(url, method);
+        console.log('result :', result);
+        setBuses(result.data);
+    }
+    catch(err){
+        console.log('err :', err);
+    }
   }, [search]);
 
   const genCards = courses.map((course, index) => {

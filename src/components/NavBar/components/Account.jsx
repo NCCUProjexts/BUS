@@ -26,7 +26,7 @@ function Account() {
   const dispatch = useDispatch();
 
   const loggedIn = useSelector(state => isLoggedIn(state));
-  const avatar = useSelector(state => googleProfile(state)).picture;
+  const avatar = useSelector(state => googleProfile(state)).photoURL;
   
   const handleOpen = () => dispatch({type: "auth.dialog.open"});
 

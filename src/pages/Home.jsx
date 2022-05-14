@@ -3,11 +3,10 @@ import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import NavBar from "../components/NavBar/Main";
 import TypeButtonToggler from "../components/TypeButtonToggler";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AuthModal from "../components/AuthDialog/Main";
-
 const HomeBox = styled(Box)(({ theme }) => ({
   height: "100vh",
   display: "flex",

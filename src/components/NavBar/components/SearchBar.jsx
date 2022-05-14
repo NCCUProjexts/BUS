@@ -25,7 +25,7 @@ const SearchBarInput = styled("input")(({ theme }) => ({
 function SearchBar({search, setSearch}) {
     return (
         <SearchBarBox>
-            <SearchBarInput value={search} onChange={(e) => setSearch(e.target.value)} placeholder="輸入課名、老師或系所" />
+            <SearchBarInput value={search} onChange={(e) => setSearch(e.target.value)} placeholder="公車號碼" />
         </SearchBarBox>
     )
 }
