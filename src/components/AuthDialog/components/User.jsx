@@ -5,16 +5,21 @@ import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { googleProfile } from "../../../store/selectors/auth"
 import { logout } from "../../../store/actions/auth";
+import { getAuth, signOut } from "firebase/auth";
 
 function User() {
   const dispatch = useDispatch();
   const user = useSelector(state => googleProfile(state));
-  const avatar = user.picture;
-  const name = user.name;
-  const email = user.email
+  const avatar = user.photoURL;
+  const name = user.displayName;
+  const email = user.email;
+  const auth = getAuth();
 
-  const responseGoogle = (e) => {
-    dispatch(logout());
+  const handleClick = (e) => {
+    signOut(auth).then(() => {
+      dispatch(logout());
+    }).catch((error) => {
+    });
   };
 
   return (
@@ -27,17 +32,12 @@ function User() {
         </Box>
       </DialogTitle>
       <DialogActions>
-        <GoogleLogout
-          clientId="22551978498-3d7pfatc0km7mpm8t6glfuu4ev2jld3a.apps.googleusercontent.com"
-          buttonText="Logout"
-          render={renderProps => (
-            <Button variant="contained" onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<GoogleIcon />}>
-              Logout
-            </Button>
-          )}
-          onLogoutSuccess={responseGoogle}
-        >
-        </GoogleLogout>
+        <Button variant="outlined" >
+          Footprint
+        </Button>
+        <Button variant="contained" onClick={handleClick} startIcon={<GoogleIcon />}>
+          Logout
+        </Button>
       </DialogActions>
     </Box>
   )
