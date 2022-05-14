@@ -1,0 +1,7 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+  margin: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
