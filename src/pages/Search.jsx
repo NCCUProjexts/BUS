@@ -8,6 +8,7 @@ import { coursesPagination, coursesLength } from "../store/selectors/course";
 import { getCourse } from "../store/actions/course";
 import Card from "../components/Card/Main";
 import AuthModal from "../components/AuthDialog/Main";
+import ajax from  "../api/index.js"
 
 const SearchBox = styled(Box)(({ theme }) => ({}));
 const PaginationBox = styled(Paper)(({ theme }) => ({
@@ -30,19 +31,46 @@ function Search() {
     setSearch(searchParams.get("search"));
     setPage(searchParams.get("page") ? searchParams.get("page") : 1);
   }, [searchParams]);
+  /*
+  data:[
+    0:{
+        A2EventType: 1
+        BusStatus: 0
+        Direction: 1
+        DutyStatus: 1
+        GPSTime: "2022-05-15T05:19:29+08:00"
+        OperatorID: "100"
+        PlateNumb: "072-U7"
+        RouteID: "16111"
+        RouteName: {Zh_tw: '307', En: '307'}
+        RouteUID: "TPE16111"
+        SrcUpdateTime: "2022-05-15T05:20:00+08:00"
+        StopID: "15314"
+        StopName: {Zh_tw: '行政院', En: 'Executive Yuan'}
+        StopSequence: 19
+        StopUID: "TPE15314"
+        SubRouteID: "157462"
+        SubRouteName: {Zh_tw: '307莒光往板橋前站', En: '307'}
+        SubRouteUID: "TPE157462"
+        UpdateTime: "2022-05-15T05:20:03+08:00"
+    }
+  ]
+  */
 
-  useEffect(async () => {
-    try{
-      const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON"
-      const method = "GET";
-        const result = await ajax(url, method);
-        console.log('result :', result);
-        setBuses(result.data);
+  useEffect(()=>{
+    const getBus = async () => {
+      try{
+        const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON"
+        const method = "GET";
+          const result = await ajax(url, method);
+          setBuses(result.data);
+      }
+      catch(err){
+          console.log('err :', err);
+      }
     }
-    catch(err){
-        console.log('err :', err);
-    }
-  }, [search]);
+    getBus();
+  }, [search]); 
 
   const genCards = courses.map((course, index) => {
     return (
