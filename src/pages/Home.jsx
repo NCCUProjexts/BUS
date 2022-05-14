@@ -67,8 +67,8 @@ function Home() {
   useEffect(()=>{
     const getBus = async () => {
       try{
-        const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON"
-        const method = "GET";
+          const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON";
+          const method = "GET";
           const result = await ajax(url, method);
           console.log('result :', result);
           setBuses(result.data);

@@ -56,11 +56,11 @@ function Search() {
     }
   ]
   */
-
+  25.04235,121.5650027
   useEffect(()=>{
     const getBus = async () => {
       try{
-        const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON"
+        const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.04235%2C%20121.5650027%2C%201000)&%24format=JSON"
         const method = "GET";
           const result = await ajax(url, method);
           setBuses(result.data);
