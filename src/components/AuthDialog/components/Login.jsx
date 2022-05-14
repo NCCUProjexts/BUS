@@ -5,23 +5,32 @@ import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../../store/actions/auth"
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 
 function Login({ onClose }) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
 
-  const responseGoogle = (e) => {
-    if (e.error) {
-      alert(e.error);
-      return;
-    }
-    setLoading(true);
-    localStorage.setItem("authToken", e.tokenId);
-    dispatch(login()).then(res => {
-      onClose();
-      setLoading(false);
-    })
-  };
+  const handleClick = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        dispatch({
+          type: "auth.googleProfile.set",
+          googleProfile: user
+        })
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  }
 
   return (
     <Box>
@@ -32,23 +41,14 @@ function Login({ onClose }) {
           </DialogContent>
           :
           <Box>
-            <DialogTitle sx={{textAlign:"center"}}>
+            <DialogTitle sx={{ textAlign: "center" }}>
               登入
             </DialogTitle>
             <DialogContent>
               <DialogContentText>
-                <GoogleLogin
-                  clientId="22551978498-3d7pfatc0km7mpm8t6glfuu4ev2jld3a.apps.googleusercontent.com"
-                  render={renderProps => (
-                    <Button variant="contained" onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<GoogleIcon />}>
-                      Google Login
-                    </Button>
-                  )}
-                  buttonText="Login"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                />
+                <Button variant="contained" onClick={handleClick} startIcon={<GoogleIcon />}>
+                  Google Login
+                </Button>
               </DialogContentText>
             </DialogContent>
           </Box>

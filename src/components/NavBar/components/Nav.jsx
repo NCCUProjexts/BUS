@@ -46,7 +46,7 @@ function Nav({ hideTitle }) {
           </Box>
           :
           <NavBox>
-            <Typography variant="h5" sx={{ fontWeight: "bold" }} color="primary">政大課程評價網</Typography>
+            <Typography variant="h5" sx={{ fontWeight: "bold" }} color="primary">BUS</Typography>
             <SearchBar search={search} setSearch={setSearch} />
             <IconButton color="primary" type="submit">
               <SearchIcon />

@@ -1,8 +1,8 @@
 import { createSelector } from "reselect"
 
 export const isLoggedIn = createSelector(
-  (state) => state.auth.profile,
-  (profile) => profile != null
+  (state) => state.auth.googleProfile,
+  (googleProfile) => googleProfile != null
 )
 
 export const googleProfile = createSelector(
@@ -11,8 +11,8 @@ export const googleProfile = createSelector(
     if(profile) return profile;
     return {
       email: '',
-      name: '',
-      picture: '',
+      displayName: '',
+      photoURL: '',
       locale: 'zh-TW',
     }
   }
