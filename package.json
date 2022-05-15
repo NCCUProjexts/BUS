@@ -1,5 +1,5 @@
 {
-  "name": "course-nccu",
+  "name": "safe_bus",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -33,6 +33,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
-    "vite": "^2.9.7"
+    "vite": "^2.9.7",
+    "vite-plugin-pwa": "^0.12.0"
   }
 }

@@ -1,7 +1,7 @@
 export const LightColor = {
   type: "light",
 
-  primary: "#7188B4",
+  primary: "#008080",
   secondary: "#56B0B6",
 
   tagRequired: "#CEC3B3",
