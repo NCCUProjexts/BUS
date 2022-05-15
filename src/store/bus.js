@@ -1,16 +1,16 @@
 const bus_state = {
-  Geolocation: ["", ""],
+  Geolocation: ["25.04235", "121.5650027"],
   nearestStop: {},
   allStops: [],
   loading: true
 }
 
-const Geolocation = (state = ["", ""], action) => {
+const Geolocation = (state = ["25.04235", "121.5650027"], action) => {
   switch (action.type) {
     case "bus.Geolocation.set":
       return [action.latitude, action.longitude];
     case "bus.Geolocation.reset":
-      return ["", ""];
+      return ["25.04235", "121.5650027"];
     default:
       return state;
   }

@@ -22,7 +22,7 @@ function Navbar() {
           </Box>
           <Box sx={{ display: { xs: 'block', sm: 'block', md: 'none' }, height: "100%" }}>
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold" }} color="primary">BUS</Typography>
+              <Typography variant="h5" sx={{ fontWeight: "bold" }} color="primary">Safe BUS</Typography>
             </Box>
           </Box>
         </Box>

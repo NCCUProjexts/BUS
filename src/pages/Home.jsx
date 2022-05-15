@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton, Grid, Container, Paper, Pagination, CircularProgress } from "@mui/material";
+import { Box, Typography, IconButton, Grid, Container, Paper, Button, CircularProgress } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import NavBar from "../components/NavBar/Main";
@@ -16,39 +16,17 @@ const HomeBox = styled(Box)(({ theme }) => ({
   flexDirection: "column"
 }));
 
-const SearchBox = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  top: "40%",
-  left: "10%",
-  width: "80%"
-}));
-
-const SearchBarBox = styled(Box)(({ theme }) => ({
-  flexGrow: 1,
-  margin: theme.spacing(0) + " " + theme.spacing(1),
-  height: "70%",
-  borderRadius: "50px",
-  boxShadow: "inset 2px 2px 8px rgba(0, 0, 0, 0.25)",
-  display: "flex",
-  alignItems: "center"
-}));
-
-const SearchBarInput = styled("input")(({ theme }) => ({
-  height: "100%",
-  width: "calc(100% - 20px)",
-  margin: "0px 20px",
-  fontSize: "1.2rem",
-  border: "none",
-  backgroundColor: "transparent",
-  outlineWidth: 0,
-  fontWeight: "bold",
-  fontFamily: "Noto Sans TC"
-}));
-
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  margin: theme.spacing(0) + " " + theme.spacing(1),
+const CardBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
+  borderRadius: theme.spacing(2),
   boxShadow: "-10px -11px 16px 1px rgba(252, 252, 252, 0.7), 9px 14px 24px -10px rgba(0, 0, 0, 0.25)",
-  backgroundColor: theme.palette.background.default
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: theme.spacing(3),
+  height: "100%",
+  cursor: "pointer"
 }));
 
 function Home() {
@@ -84,17 +62,21 @@ function Home() {
     <HomeBox>
       <NavBar />
       <Container maxWidth="lg" sx={{ padding: "15px" }}>
-        <Typography variant="h5" sx={{ padding: "0px 15px" }}>{nearestStop?.StationName?.Zh_tw}</Typography>
-        <br />
         {
           busCards.length == 0 && !loading ?
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Typography>查無資料</Typography>
             </Box>
             :
-            <Grid container spacing={3} sx={{ paddingBottom: "70px" }}>
-              {busCards}
-            </Grid>
+            <>
+              <Box sx={{ display: "flex", justifyContent: "space-between", padding: "24px" }}>
+                <Typography variant="h5">{nearestStop?.StationName?.Zh_tw}</Typography>
+                <Button variant="contained" href="/mileage">里程累積</Button>
+              </Box>
+              <Grid container spacing={3} sx={{ paddingBottom: "70px" }}>
+                {busCards}
+              </Grid>
+            </>
         }
         {
           loading ?

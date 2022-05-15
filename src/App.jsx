@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import theme from "./theme/theme";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import Mileage from "./pages/Mileage"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
@@ -35,8 +36,6 @@ function App() {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(setLocation);
-    } else {
-      dispatch(reduxSetLocation("25.04235", "121.5650027"))
     }
   }, [])
 
@@ -52,7 +51,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
-
+          <Route path="/mileage" element={<Mileage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
