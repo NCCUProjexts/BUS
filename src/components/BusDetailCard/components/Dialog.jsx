@@ -14,7 +14,6 @@ import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 
 export default function MaxWidthDialog({open,setOpen,bus}) {
-console.log('bus :', bus);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('sm');
 
@@ -63,28 +62,8 @@ console.log('bus :', bus);
               width: 'fit-content',
             }}
           >
-            
-            {/* <img style="width:100%;" id="image" src={bus.RouteMapImageUrl?bus.RouteMapImageUrl:""} /> */}
-            {/* <FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <InputLabel htmlFor="max-width">maxWidth</InputLabel>
-              <Select
-                autoFocus
-                value={maxWidth}
-                onChange={handleMaxWidthChange}
-                label="maxWidth"
-                inputProps={{
-                  name: 'max-width',
-                  id: 'max-width',
-                }}
-              >
-                <MenuItem value={false}>false</MenuItem>
-                <MenuItem value="xs">xs</MenuItem>
-                <MenuItem value="sm">sm</MenuItem>
-                <MenuItem value="md">md</MenuItem>
-                <MenuItem value="lg">lg</MenuItem>
-                <MenuItem value="xl">xl</MenuItem>
-              </Select>
-            </FormControl> */}
+            <img style="width:100%;" id="image" src={bus.RouteMapImageUrl?bus.RouteMapImageUrl:""} />
+          
             <FormControlLabel
               sx={{ mt: 1 }}
               control={
