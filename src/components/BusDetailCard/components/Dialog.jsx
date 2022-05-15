@@ -38,9 +38,9 @@ export default function MaxWidthDialog({open,setOpen,bus}) {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
         Open max-width dialog
-      </Button>
+      </Button> */}
       <Dialog
         fullWidth={fullWidth}
         maxWidth={maxWidth}
@@ -62,7 +62,8 @@ export default function MaxWidthDialog({open,setOpen,bus}) {
               width: 'fit-content',
             }}
           >
-            <img style="width:100%;" id="image" src={bus.RouteMapImageUrl?bus.RouteMapImageUrl:""} />
+            <img style={{width:"100%"}} src={bus.RouteMapImageUrl?bus.RouteMapImageUrl:""} >
+              </img>
           
             <FormControlLabel
               sx={{ mt: 1 }}
