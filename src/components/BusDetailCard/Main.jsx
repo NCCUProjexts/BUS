@@ -1,8 +1,10 @@
 import { Box, Typography, ButtonBase } from "@mui/material";
 import { styled } from '@mui/material/styles';
+import { useEffect, useState } from "react";
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import Star from "../../assets/star.svg"
 import { useNavigate } from "react-router-dom";
+import MaxWidthDialog from "../BusDetail/Dialog.jsx";
 
 const CardBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -22,23 +24,18 @@ const TotalRateAnnounce = styled(Typography)(({ theme }) => ({
 }));
 
 function Card({ Route }) {
+console.log('Route :', Route);
   const navigate = useNavigate();
-
-  //const navigateToCourse = (id) => {
-  //  navigate("/detail/" + id)
-  //}
+  const [openDialog, setOpenDialog] = useState(false);
 
   return (
-    <CardBox>
+    <CardBox  onClick={() => setOpenDialog(true)}>
       <Typography variant="h5" sx={{ fontWeight: "bold" }}>{Route.RouteName.Zh_tw}</Typography>
       <Typography>
-        {
-        Route.EstimateTime == -1 ? "無資料" :
-        Route.EstimateTime <= 60 ? "即將進站" : 
-        Math.floor(Route.EstimateTime / 60) + "分"}
+        {Route.DepartureStopNameZh}-{Route.DestinationStopNameZh}
         </Typography>
+      <MaxWidthDialog open={openDialog} setOpen={setOpenDialog} bus={Route} />
     </CardBox>
   )
 }
-
 export default Card;

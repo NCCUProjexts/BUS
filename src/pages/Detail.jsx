@@ -16,7 +16,7 @@ const DetailBox = styled("div")(({ theme }) => ({}));
 function Detail() {
   const params = useParams();
   const dispatch = useDispatch();
-  const courseId = params.courseId;
+  const busId = params.busId;
   const [loading, setLoading] = useState(true);
   const [leftPannelHeight, setLeftPannelHeight] = useState(0);
   const isLoggedin = useSelector(state => isLoggedIn(state));
