@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton, Grid, Container, Paper, Pagination } from "@mui/material";
+import { Box, Typography, IconButton, Grid, Container, Paper, Pagination, CircularProgress } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import NavBar from "../components/NavBar/Main";
@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AuthModal from "../components/AuthDialog/Main";
-import ajax from  "../api/index.js"
+import ajax from "../api/index.js"
 
 const HomeBox = styled(Box)(({ theme }) => ({
   height: "100vh",
@@ -55,30 +55,14 @@ function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
-  const [buses, setBuses] = useState([]);
-  const loading = useSelector(state => state.course.loading);
+  const loading = useSelector(state => state.bus.loading);
+  const nearestStop = useSelector(state => state.bus.nearestStop);
   const open = useSelector(state => state.auth.dialogOpen);
 
   const SearchBox = styled(Box)(({ theme }) => ({}));
   const PaginationBox = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.background.default,
   }));
-
-  useEffect(()=>{
-    const getBus = async () => {
-      try{
-        const url = "https://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeNearStop/NearBy?%24top=30&%24spatialFilter=nearby(25.047675%2C%20121.517055%2C%201000)&%24format=JSON"
-        const method = "GET";
-          const result = await ajax(url, method);
-          console.log('result :', result);
-          setBuses(result.data);
-      }
-      catch(err){
-          console.log('err :', err);
-      }
-    }
-    getBus();
-  }, []); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,43 +72,20 @@ function Home() {
     });
   }
 
-  const busCards = buses.map((bus, index) => {
+  const busCards = nearestStop.Stops ? nearestStop.Stops.map((bus, index) => {
     return (
-      <Grid item xs={12} sm={6} md={4} key={index}>
-        <Card
-          // bus={bus.code}
-          // name={bus.busNameZH_TW}
-          // teacher={bus.instructorZH_TW}
-          // unit={bus.departmentZH_TW}
-          // rate={bus.avg_rate == -1 ? "無" : bus.avg_rate.toFixed(1)}
-          // customRatePopulationm={bus.num_of_custom_feedback}
-          // totalRatePopulation={bus.num_of_feedback + course.num_of_custom_feedback}
-        />
+      <Grid item xs={12} sm={6} key={index}>
+        <Card Route={bus} />
       </Grid>
     )
-  })
+  }) : "";
 
   return (
     <HomeBox>
       <NavBar />
-      {/* <Box sx={{ flexGrow: 1 }}>
-        <SearchBox>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md>
-              <Typography sx={{ fontWeight: "bold", fontSize: "2.5rem" }} color="primary">政大課程評價網</Typography>
-            </Grid>
-          </Grid>
-          <form onSubmit={handleSubmit} style={{ display: "flex", alignItems: "center", height: "80px" }}>
-            <SearchBarBox>
-              <SearchBarInput value={search} onChange={(e) => setSearch(e.target.value)} placeholder="輸入課名、老師或系所" />
-            </SearchBarBox>
-            <StyledIconButton color="primary" size="large" type="submit">
-              <SearchIcon fontSize="large" />
-            </StyledIconButton>
-          </form>
-        </SearchBox>
-      </Box> */}
       <Container maxWidth="lg" sx={{ padding: "15px" }}>
+        <Typography variant="h5" sx={{ padding: "0px 15px" }}>{nearestStop?.StationName?.Zh_tw}</Typography>
+        <br />
         {
           busCards.length == 0 && !loading ?
             <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -143,23 +104,8 @@ function Home() {
             :
             ""
         }
-        {/* {
-          busCards.length != 0 ?
-            <PaginationBox sx={{ position: "fixed", bottom: 0, right: 0, left: 0, padding: "15px 0px", display: "flex", justifyContent: "center" }} elevation={0}>
-              <Pagination
-                page={Number(page)}
-                count={length}
-                onChange={(e, p) => navigate({
-                  pathname: '/search',
-                  search: '?search=' + search + '&page=' + p,
-                })}
-              />
-            </PaginationBox>
-            :
-            ""
-        } */}
       </Container>
-      <AuthModal open={open} handleClose={() => dispatch({type: "auth.dialog.close"})} />
+      <AuthModal open={open} handleClose={() => dispatch({ type: "auth.dialog.close" })} />
     </HomeBox>
   )
 

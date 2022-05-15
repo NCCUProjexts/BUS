@@ -9,7 +9,7 @@ const CardBox = styled(Box)(({ theme }) => ({
   borderRadius: theme.spacing(2),
   boxShadow: "-10px -11px 16px 1px rgba(252, 252, 252, 0.7), 9px 14px 24px -10px rgba(0, 0, 0, 0.25)",
   display: "flex",
-  flexDirection: "column",
+  alignItems: "center",
   justifyContent: "space-between",
   padding: theme.spacing(3),
   height: "100%",
@@ -21,33 +21,21 @@ const TotalRateAnnounce = styled(Typography)(({ theme }) => ({
   fontSize: "0.9rem"
 }));
 
-function Card({ name, teacher, unit, rate, customRatePopulationm, totalRatePopulation, course }) {
+function Card({ Route }) {
   const navigate = useNavigate();
 
-  const navigateToCourse = (id) => {
-    navigate("/detail/" + id)
-  }
+  //const navigateToCourse = (id) => {
+  //  navigate("/detail/" + id)
+  //}
 
   return (
-    <CardBox onClick={() => navigateToCourse(course)}>
-      <Box>
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>{name}</Typography>
-        <Typography>{teacher} / {unit}</Typography>
-      </Box>
-      <br />
-      <Box>
-        <TotalRateAnnounce>總評價</TotalRateAnnounce>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <img src={Star} style={{ height: "1rem" }} />
-            <span>&nbsp;{rate} ({customRatePopulationm}人)</span>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <ChatOutlinedIcon />
-            <span>&nbsp;{totalRatePopulation}</span>
-          </Box>
-        </Box>
-      </Box>
+    <CardBox>
+      <Typography variant="h5" sx={{ fontWeight: "bold" }}>{Route.RouteName.Zh_tw}</Typography>
+      <Typography>
+        {
+        Route.EstimateTime == -1 ? "無資料" :
+        Route.EstimateTime <= 60 ? "即將進站" : 
+        Math.floor(Route.EstimateTime / 60) + "分"}</Typography>
     </CardBox>
   )
 }

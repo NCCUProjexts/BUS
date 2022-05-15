@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
-import Logo from "../../../assets/logo.svg";
+import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 
 const IconBox = styled(Box)(({ theme }) => ({
   padding: "10px",
@@ -14,13 +14,19 @@ const IconBox = styled(Box)(({ theme }) => ({
   cursor: "pointer"
 }));
 
+const BusIcon = styled(DirectionsBusIcon)(({ theme }) => ({
+  height: "100%",
+  width: "100%",
+  color: theme.palette.grey["400"]
+}));
+
 
 function Icon() {
   const navigate = useNavigate();
 
   return (
     <IconBox onClick={() => navigate("/")}>
-      <img src={Logo} height="100%" width="100%"></img>
+      <BusIcon />
     </IconBox>
   )
 }

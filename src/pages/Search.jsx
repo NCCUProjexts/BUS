@@ -4,8 +4,6 @@ import NavBar from "../components/NavBar/Main";
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { coursesPagination, coursesLength } from "../store/selectors/course";
-import { getCourse } from "../store/actions/course";
 import Card from "../components/Card/Main";
 import AuthModal from "../components/AuthDialog/Main";
 import ajax from  "../api/index.js"
