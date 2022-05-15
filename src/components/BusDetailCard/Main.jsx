@@ -29,7 +29,8 @@ console.log('Route :', Route);
   open
   return (
     <>
-    <CardBox  onClick={() => {setOpen(true)}}>
+    {/* <CardBox  onClick={() => {setOpen(true)}}> */}
+    <CardBox>
       <Typography variant="h5" sx={{ fontWeight: "bold" }}>{Route.RouteName.Zh_tw}</Typography>
       <Typography>
         {Route.DepartureStopNameZh}-{Route.DestinationStopNameZh}
