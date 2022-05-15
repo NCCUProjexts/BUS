@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import Star from "../../assets/star.svg"
 import { useNavigate } from "react-router-dom";
-import MaxWidthDialog from "../BusDetail/Dialog.jsx";
+import MaxWidthDialog from "./components/Dialog.jsx";
 
 const CardBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
