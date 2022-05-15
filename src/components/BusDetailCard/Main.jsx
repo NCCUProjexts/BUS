@@ -25,17 +25,18 @@ const TotalRateAnnounce = styled(Typography)(({ theme }) => ({
 
 function Card({ Route }) {
 console.log('Route :', Route);
-  const navigate = useNavigate();
-  const [openDialog, setOpenDialog] = useState(false);
-
+  const [open, setOpen] = useState(false);
+  open
   return (
-    <CardBox  onClick={() => setOpenDialog(true)}>
+    <>
+    <CardBox  onClick={() => {setOpen(true)}}>
       <Typography variant="h5" sx={{ fontWeight: "bold" }}>{Route.RouteName.Zh_tw}</Typography>
       <Typography>
         {Route.DepartureStopNameZh}-{Route.DestinationStopNameZh}
         </Typography>
-      <MaxWidthDialog open={openDialog} setOpen={setOpenDialog} bus={Route} />
     </CardBox>
+      <MaxWidthDialog open={open} setOpen={setOpen} bus={Route} />
+    </>
   )
 }
 export default Card;
